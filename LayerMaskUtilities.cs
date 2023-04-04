@@ -37,7 +37,7 @@ public static class LayerMaskUtilities
     }
 
 #if UNITY_EDITOR
-    public static string[] GetLayers()
+    public static string[] GetProjectLayers()
     {
         SerializedObject tagManager = new SerializedObject(AssetDatabase.LoadMainAssetAtPath("ProjectSettings/TagManager.asset"));
         SerializedProperty layers = tagManager.FindProperty("layers");
