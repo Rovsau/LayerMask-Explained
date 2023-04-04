@@ -9,13 +9,13 @@ The other methods in Unity, such as Raycast(), require a LayerMask.
 A LayerMask contains a 1 or 0 for all 32 layers.  
 
 Use **GetMask**() to create a LayerMask which includes all the layers specified.  
-Or use it to create masks with single layers, and use addition (+) to create combinations between them.  
+Or use it to create masks with single layers, and use the OR **|** operator to create combinations between them.  
 ```cs
 LayerMask a = LayerMask.GetMask("Default");
 LayerMask b = LayerMask.GetMask("Water");
 LayerMask c = LayerMask.GetMask("Default", "Water");
 
-LayerMask raycastLayers = a + b;  // The same as 'c'
+LayerMask raycastLayers = a | b;  // The same as 'c'
 ```
 
 <details>
@@ -39,7 +39,7 @@ public class Example : MonoBehaviour
         LayerMask b = LayerMask.GetMask("Water");
         LayerMask c = LayerMask.GetMask("Default", "Water");
 
-        raycastLayers = a + b;  // The same as 'c'
+        raycastLayers = a | b;  // The same as 'c'
     }
 
     private void Update()
