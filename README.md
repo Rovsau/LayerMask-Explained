@@ -63,44 +63,49 @@ Further reading is optional.
 # Standard LayerMask Functions
 
 ```cs
-public static LayerMask Everything => -1;
-public static LayerMask Nothing => 0;
+using UnityEngine;
 
-public static LayerMask AddLayerToMask(LayerMask layerMask, int layerIndex)
+public static class LayerMaskFunctions
 {
-    return layerMask | (1 << layerIndex);
-}
+    public static LayerMask Everything => -1;
+    public static LayerMask Nothing => 0;
 
-public static LayerMask RemoveLayerFromMask(LayerMask layerMask, int layerIndex)
-{
-    return layerMask & ~(1 << layerIndex);
-}
+    public static LayerMask AddLayerToMask(LayerMask layerMask, int layerIndex)
+    {
+        return layerMask | (1 << layerIndex);
+    }
 
-public static bool HasLayerInMask(LayerMask layerMask, int layerIndex)
-{
-    return (layerMask & (1 << layerIndex)) != 0;
-}
+    public static LayerMask RemoveLayerFromMask(LayerMask layerMask, int layerIndex)
+    {
+        return layerMask & ~(1 << layerIndex);
+    }
 
-public static LayerMask InvertLayerMask(LayerMask layerMask)
-{
-    return ~layerMask;
-}
+    public static bool HasLayerInMask(LayerMask layerMask, int layerIndex)
+    {
+        return (layerMask & (1 << layerIndex)) != 0;
+    }
 
-public static LayerMask CombineLayerMasks(LayerMask layerMask1, LayerMask layerMask2)
-{
-    return layerMask1 | layerMask2;
-}
+    public static LayerMask InvertLayerMask(LayerMask layerMask)
+    {
+        return ~layerMask;
+    }
 
-// Layers which were found in both masks.
-public static LayerMask IntersectionLayerMasks(LayerMask layerMask1, LayerMask layerMask2)
-{
-    return layerMask1 & layerMask2;
-}
+    public static LayerMask CombineLayerMasks(LayerMask layerMask1, LayerMask layerMask2)
+    {
+        return layerMask1 | layerMask2;
+    }
 
-// Layers which were present, but not found in both.
-public static LayerMask SymmetricDifference(LayerMask layerMask1, LayerMask layerMask2)
-{
-    return layerMask1 ^ layerMask2;
+    // Layers which were found in both masks.
+    public static LayerMask IntersectionLayerMasks(LayerMask layerMask1, LayerMask layerMask2)
+    {
+        return layerMask1 & layerMask2;
+    }
+
+    // Layers which were present, but not found in both.
+    public static LayerMask SymmetricDifference(LayerMask layerMask1, LayerMask layerMask2)
+    {
+        return layerMask1 ^ layerMask2;
+    }
 }
 ```
 
