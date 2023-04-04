@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 public static class LayerMaskUtilities
@@ -34,4 +35,18 @@ public static class LayerMaskUtilities
         System.Array.Resize(ref layerIndexes, index);
         return layerIndexes;
     }
+
+#if UNITY_EDITOR
+    public static string[] GetLayers()
+    {
+        SerializedObject tagManager = new SerializedObject(AssetDatabase.LoadMainAssetAtPath("ProjectSettings/TagManager.asset"));
+        SerializedProperty layers = tagManager.FindProperty("layers");
+        string[] result = new string[layers.arraySize];
+        for (int i = 0; i < layers.arraySize; i++)
+        {
+            result[i] = layers.GetArrayElementAtIndex(i).stringValue;
+        }
+        return result;
+    } 
+#endif
 }
