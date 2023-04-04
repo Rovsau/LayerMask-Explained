@@ -32,7 +32,8 @@ but it is possible to convert the integer value into binary and have a look.
 int layerIndex = LayerMask.NameToLayer("Water");  // layerIndex == 4
 LayerMask layerMask = 1 << layerIndex;  // layerMask.value == 16
 string binary = Convert.ToString(layerMask, 2).PadLeft(32, '0');
-Debug.Log(binary);  // 00000000000000000000000000010000
+Debug.Log(binary);  
+// 00000000000000000000000000010000
 ```
 Each bit in the binary sequence represents a layer index.  
 The sequence runs from Right to Left.  
