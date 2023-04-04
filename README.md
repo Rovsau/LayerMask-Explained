@@ -9,7 +9,7 @@ The other methods in Unity, such as Raycast(), require a LayerMask.
 A LayerMask contains a 1 or 0 for all 32 layers.  
 
 Use **GetMask**() to create a LayerMask which includes all the layers specified.  
-Or use it to create a mask with a single layer, and use addition (+) to create combinations between them.  
+Or use it to create masks with single layers, and use addition (+) to create combinations between them.  
 ```cs
 LayerMask a = LayerMask.GetMask("Default");
 LayerMask b = LayerMask.GetMask("Water");
@@ -57,57 +57,6 @@ public class Example : MonoBehaviour
 
 That is all which is needed to work with LayerMasks in Unity.  
 Further reading is optional.
-
-<br>
-
-# Standard LayerMask Functions
-
-```cs
-using UnityEngine;
-
-public static class LayerMaskFunctions
-{
-    public static LayerMask Everything => -1;
-    public static LayerMask Nothing => 0;
-
-    public static LayerMask AddLayerToMask(LayerMask layerMask, int layerIndex)
-    {
-        return layerMask | (1 << layerIndex);
-    }
-
-    public static LayerMask RemoveLayerFromMask(LayerMask layerMask, int layerIndex)
-    {
-        return layerMask & ~(1 << layerIndex);
-    }
-
-    public static bool HasLayerInMask(LayerMask layerMask, int layerIndex)
-    {
-        return (layerMask & (1 << layerIndex)) != 0;
-    }
-
-    public static LayerMask InvertLayerMask(LayerMask layerMask)
-    {
-        return ~layerMask;
-    }
-
-    public static LayerMask CombineLayerMasks(LayerMask layerMask1, LayerMask layerMask2)
-    {
-        return layerMask1 | layerMask2;
-    }
-
-    // Layers which were found in both masks.
-    public static LayerMask IntersectionLayerMasks(LayerMask layerMask1, LayerMask layerMask2)
-    {
-        return layerMask1 & layerMask2;
-    }
-
-    // Layers which were present, but not found in both.
-    public static LayerMask SymmetricDifference(LayerMask layerMask1, LayerMask layerMask2)
-    {
-        return layerMask1 ^ layerMask2;
-    }
-}
-```
 
 # Advanced
 
