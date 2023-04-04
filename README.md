@@ -8,8 +8,8 @@ gameObject.layer = layerIndex;
 The other methods in Unity, such as Raycast(), require a LayerMask.  
 A LayerMask contains a 1 or 0 for all 32 layers.  
 
-Use **GetMask**() to get a LayerMask which includes all the layers specified.  
-Or use it to get a single layer, and use **addition** (+) to create combinations between them.  
+Use **GetMask**() to create a LayerMask which includes all the layers specified.  
+Or use it to create a mask with a single layer, and use addition (+) to create combinations between them.  
 ```cs
 LayerMask a = LayerMask.GetMask("Default");
 LayerMask b = LayerMask.GetMask("Water");
@@ -53,18 +53,18 @@ public class Example : MonoBehaviour
 ```
 </details>
 
+<br>
+
 That is all which is needed to work with LayerMasks in Unity.  
 Further reading is optional.
 
+<br>
 
-# Advanced
-
-<details>
-<summary>Standard LayerMask Functions</summary>
+# Standard LayerMask Functions
 
 ```cs
-public static LayerMask Everything() => -1;
-public static LayerMask Nothing() => 0;
+public static LayerMask Everything => -1;
+public static LayerMask Nothing => 0;
 
 public static LayerMask AddLayerToMask(LayerMask layerMask, int layerIndex)
 {
@@ -103,7 +103,8 @@ public static LayerMask SymmetricDifference(LayerMask layerMask1, LayerMask laye
     return layerMask1 ^ layerMask2;
 }
 ```
-</details>
+
+# Advanced
 
 **BitMask** is a data science concept for storing data in a binary format,  
 which is very efficient because it is the native language of digital computers. 
@@ -128,6 +129,8 @@ This is used for example when adding a layer to an existing mask, by layer index
 ```cs
 LayerMask mask = mask | (1 << index);
 ```
+
+<br>
 
 The value of the mask is only shown as an integer, and the binary sequence itself is not exposed,  
 but it is possible to convert the integer value into binary and have a look. 
