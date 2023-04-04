@@ -61,3 +61,5 @@ Further reading is optional.
 [LayerMask Functions](LayerMaskFunctions.cs)  
 
 [Advanced (BitMask, Bit Shifting)](Advanced.md)
+
+[LayerMask Utilities](LayerMaskUtilities.cs)
