@@ -55,7 +55,7 @@ public class Example : MonoBehaviour
 
 <br>
 
-That is all which is needed to work with LayerMasks in Unity.  
+That is all which is needed to work with LayerMask in Unity.  
 Further reading is optional.
 
 [LayerMask Functions](LayerMaskFunctions.cs)  
