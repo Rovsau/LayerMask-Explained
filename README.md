@@ -1,13 +1,12 @@
 # LayerMask Explained
-A LayerMask contains a 1 or 0 for all 32 layers.  
-
 Use **NameToLayer**() to get a layer's index.  
 It is used to set an object's layer. 
 ```cs
 int layerIndex = LayerMask.NameToLayer("Default");
 gameObject.layer = layerIndex;
 ```
-The other methods in Unity, such as Raycast(), require a LayerMask.
+The other methods in Unity, such as Raycast(), require a LayerMask.  
+A LayerMask contains a 1 or 0 for all 32 layers.  
 
 Use **GetMask**() to get a LayerMask which includes all the layers specified.  
 Or use it to get a single layer, and use **addition** (+) to create combinations between them.  
@@ -20,30 +19,30 @@ LayerMask raycastLayers = a + b;  // The same as 'c'
 ```
 
 <details>
-<summary>Full script example</summary>
+<summary>Raycast script example</summary>
 
 ```cs
 using UnityEngine;
 
-public class LayerMaskScriptExample : MonoBehaviour
+public class Example : MonoBehaviour
 {
+    public float distance;
+
     private Ray ray;
-    private float distance;
     private LayerMask raycastLayers;
 
     private void Awake()
     {
+        ray = new Ray(transform.position, transform.forward);
+
         LayerMask a = LayerMask.GetMask("Default");
         LayerMask b = LayerMask.GetMask("Water");
         LayerMask c = LayerMask.GetMask("Default", "Water");
 
         raycastLayers = a + b;  // The same as 'c'
-
-        ray = new Ray(transform.position, transform.forward);
-        distance = Mathf.Infinity;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (Physics.Raycast(ray, distance, raycastLayers))
         {
@@ -54,11 +53,57 @@ public class LayerMaskScriptExample : MonoBehaviour
 ```
 </details>
 
+That is all which is needed to work with LayerMasks in Unity.  
+Further reading is optional.
+
+
+# Advanced
 
 <details>
-<summary>Would you like to know more?</summary>
+<summary>Standard LayerMask Functions</summary>
 
-# BitMask  
+```cs
+public static LayerMask Everything() => -1;
+public static LayerMask Nothing() => 0;
+
+public static LayerMask AddLayerToMask(LayerMask layerMask, int layerIndex)
+{
+    return layerMask | (1 << layerIndex);
+}
+
+public static LayerMask RemoveLayerFromMask(LayerMask layerMask, int layerIndex)
+{
+    return layerMask & ~(1 << layerIndex);
+}
+
+public static bool HasLayerInMask(LayerMask layerMask, int layerIndex)
+{
+    return (layerMask & (1 << layerIndex)) != 0;
+}
+
+public static LayerMask InvertLayerMask(LayerMask layerMask)
+{
+    return ~layerMask;
+}
+
+public static LayerMask CombineLayerMasks(LayerMask layerMask1, LayerMask layerMask2)
+{
+    return layerMask1 | layerMask2;
+}
+
+// Layers which were found in both masks.
+public static LayerMask IntersectionLayerMasks(LayerMask layerMask1, LayerMask layerMask2)
+{
+    return layerMask1 & layerMask2;
+}
+
+// Layers which were present, but not found in both.
+public static LayerMask SymmetricDifference(LayerMask layerMask1, LayerMask layerMask2)
+{
+    return layerMask1 ^ layerMask2;
+}
+```
+</details>
 
 **BitMask** is a data science concept for storing data in a binary format,  
 which is very efficient because it is the native language of digital computers. 
@@ -66,19 +111,33 @@ which is very efficient because it is the native language of digital computers.
 **LayerMask** is a type of BitMask, designed to represent a set of layers in Unity.  
 It is fixed at 32 bits, the same number of max layers in the game engine.
 
+**Bit Shifting** is used to convert a single layer index into a mask, or the other way around.  
+by shifting the binary position **1** to the \<Left or Right\> for index/mask number of times.
+```cs
+int index = 4;
+
+LayerMask mask = 1 << index;
+int sameIndex = 1 >> mask;
+
+Debug.Log(mask.value);  // Output: 16
+Debug.Log(sameIndex);  // Output: 4
+```
+<br>
+
+This is used for example when adding a layer to an existing mask, by layer index.
+```cs
+LayerMask mask = mask | (1 << index);
+```
+
 The value of the mask is only shown as an integer, and the binary sequence itself is not exposed,  
 but it is possible to convert the integer value into binary and have a look. 
 ```cs
-int layerIndex = LayerMask.NameToLayer("Water");   // layerIndex == 4
-LayerMask layerMask = LayerMask.GetMask("Water");  // layerMask.value == 16
+int layerIndex = LayerMask.NameToLayer("Water");  // layerIndex == 4
+LayerMask layerMask = 1 << layerIndex;  // layerMask.value == 16
 string binary = Convert.ToString(layerMask, 2).PadLeft(32, '0');
 Debug.Log(binary);  // 00000000000000000000000000010000
 ```
-Each bit in the binary sequence represents a layer index. 
-The sequence runs from Right to Left. 
-Adding layer index 4 to a LayerMask, sets the bit at index 4 to 1, 
+Each bit in the binary sequence represents a layer index.  
+The sequence runs from Right to Left.  
+Adding layer index 4 to a LayerMask, sets the bit at index 4 to 1,  
 which when converted from binary to decimal is 16. (2^4)
-
-That explains why **layerIndex** and **LayerMask.value** are not the same, despite both being integers.
-
-</details>
