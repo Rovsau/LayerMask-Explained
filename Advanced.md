@@ -39,3 +39,6 @@ Each bit in the binary sequence represents a layer index.
 The sequence runs from Right to Left.  
 Adding layer index 4 to a LayerMask, sets the bit at index 4 to 1,  
 which when converted from binary to decimal is 16. (2^4)
+
+The bit to the far Left is known as the Most Significant Bit (MSB)  
+The bit to the far Right is known as the Least Significant Bit (LSB)
