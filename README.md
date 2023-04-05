@@ -1,8 +1,9 @@
 # LayerMask Explained
 Use **NameToLayer**() to get a layer's index.  
-It is used to set an object's layer. 
+It is used to set or compare an object's layer. 
 ```cs
 int layerIndex = LayerMask.NameToLayer("Default");
+bool sameLayer = gameObject.layer == layerIndex;
 gameObject.layer = layerIndex;
 ```
 The other methods in Unity, such as Raycast(), require a LayerMask.  
