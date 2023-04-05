@@ -49,8 +49,8 @@ which when converted from binary to decimal is 16. (2^4)
 // The bit to the far Right is known as the Least Significant Bit (LSB)  
 MSB 00000000000000000000000000000000 LSB
 
-// The MSB is called the 'signed bit' 
-// and is used to determine whether the value 
+// The MSB is used as a 'signed bit' 
+// and determine whether the value 
 // is a positive or negative number.  
 10000000000000000000000000000000 (-2,147,483,648)  
 00000000000000000000000000000000 (0)
