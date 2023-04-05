@@ -50,7 +50,7 @@ which when converted from binary to decimal is 16. (2^4)
 MSB 00000000000000000000000000000000 LSB
 
 // The MSB is used as a 'signed bit' 
-// and determine whether the value 
+// and determines whether the value 
 // is a positive or negative number.  
 10000000000000000000000000000000 (-2,147,483,648)  
 00000000000000000000000000000000 (0)
