@@ -7,7 +7,7 @@ which is very efficient because it is the native language of digital computers.
 It is fixed at 32 bits, the same number of max layers in the game engine.
 
 **Bit Shifting** is used to convert a single layer index into a mask, or the other way around.  
-by shifting the binary position **1** to the \<Left or Right\> for index/mask number of times.
+by shifting the binary position **1** to the \<Left or Right\> for index or mask number of times.
 ```cs
 int index = 4;
 
