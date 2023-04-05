@@ -44,32 +44,22 @@ which when converted from binary to decimal is 16. (2^4)
 
 # The Binary Sequence
 
-The bit to the far Left is known as the Most Significant Bit (MSB)  
-The bit to the far Right is known as the Least Significant Bit (LSB)  
 ```cs
+// The bit to the far Left is known as the Most Significant Bit (MSB)  
+// The bit to the far Right is known as the Least Significant Bit (LSB)  
 MSB 00000000000000000000000000000000 LSB
-```  
 
-<br>
-
-The MSB is called the 'signed bit' and is used to determine whether the value represented is a positive or negative number.  
-```cs
+// The MSB is called the 'signed bit' 
+// and is used to determine whether the value 
+// is a positive or negative number.  
 10000000000000000000000000000000 (-2,147,483,648)  
 00000000000000000000000000000000 (0)
-```  
 
-<br>
-
-If all bits are 1 except the MSB, the sum value would be the same as int.maxValue  
-```cs
+// If all bits are 1 except the MSB, the sum value would be the same as int.maxValue  
 01111111111111111111111111111111 (2,147,483,647)
-```  
 
-<br>
-
-And since the MSB is equal to int.**min**Value, if all the bits are 1, the final sum is -1. 
-```cs
+// And since the MSB is equal to int.minValue, if all the bits are 1, the final sum is -1. 
 11111111111111111111111111111111 (-1)
-```  
 
-That's why in Unity, the LayerMask value for Nothing is 0, and Everything is -1. 
+// That's why in Unity, the LayerMask value for Nothing is 0, and Everything is -1. 
+```
