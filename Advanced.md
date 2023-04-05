@@ -41,4 +41,15 @@ Adding layer index 4 to a LayerMask, sets the bit at index 4 to 1,
 which when converted from binary to decimal is 16. (2^4)
 
 The bit to the far Left is known as the Most Significant Bit (MSB)  
-The bit to the far Right is known as the Least Significant Bit (LSB)
+The bit to the far Right is known as the Least Significant Bit (LSB)  
+MSB 00000000000000000000000000000000 LSB  
+
+The MSB is called the 'signed bit' and is used to determine whether the numeric value represented is a positive or negative number.  
+This is a negative number: 10000000000000000000000000000000 (-2,147,483,648)  
+This is a positive number: 00000000000000000000000000000000 (0)  
+
+If all bits are 1 except the MSB, the sum value would be the same as int.maxValue  
+This is a positive number: 01111111111111111111111111111111 (2,147,483,647)  
+
+And since the MSB is equal to int.**min**Value, if all the bits are 1, the final sum is -1. 
+This is a negative number: 11111111111111111111111111111111 (-1)  
