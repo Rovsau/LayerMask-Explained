@@ -24,27 +24,23 @@ LayerMask raycastLayers = a | b;  // The same as 'c'
 ```cs
 using UnityEngine;
 
-public class Example : MonoBehaviour
+public class LayerMaskScriptExample : MonoBehaviour
 {
     public float distance;
-
-    private Ray ray;
     private LayerMask raycastLayers;
 
     private void Awake()
     {
-        ray = new Ray(transform.position, transform.forward);
-
         LayerMask a = LayerMask.GetMask("Default");
         LayerMask b = LayerMask.GetMask("Water");
         LayerMask c = LayerMask.GetMask("Default", "Water");
 
-        raycastLayers = a | b;  // The same as 'c'
+        raycastLayers = a + b;  // The same as 'c'
     }
 
     private void Update()
     {
-        if (Physics.Raycast(ray, distance, raycastLayers))
+        if (Physics.Raycast(transform.position, transform.forward, distance, raycastLayers))
         {
             Debug.Log("Hit something on a layer included in the mask!");
         }
