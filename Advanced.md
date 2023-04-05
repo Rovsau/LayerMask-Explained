@@ -6,7 +6,7 @@ which is very efficient because it is the native language of digital computers.
 **LayerMask** is a type of BitMask, designed to represent a set of layers in Unity.  
 It is fixed at 32 bits, the same number of max layers in the game engine.
 
-**Bit Shifting** is used to convert a single layer index into a mask, or the other way around.  
+**Bit Shifting** is used to convert a single layer index into a mask,  
 by shifting the binary position **1** to the \<Left for index number of times.
 ```cs
 int index = 4; 
