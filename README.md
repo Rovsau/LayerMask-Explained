@@ -28,7 +28,7 @@ using UnityEngine;
 public class LayerMaskScriptExample : MonoBehaviour
 {
     public float distance;
-    private LayerMask raycastLayers;
+    public LayerMask raycastLayers;
 
     private void Awake()
     {
