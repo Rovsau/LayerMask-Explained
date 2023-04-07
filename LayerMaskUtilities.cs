@@ -1,5 +1,9 @@
-using UnityEditor;
+using System.Collections.Generic;
 using UnityEngine;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public static class LayerMaskUtilities
 {
@@ -10,15 +14,32 @@ public static class LayerMaskUtilities
 
     public static string MaskToBinaryString(LayerMask layerMask)
     {
-        //return Convert.ToString(layerMask, 2).PadLeft(32, '0');
-        // StringBuilder would allow for "easier" conversion post return, but also add the need for System.Text.
+        const char zeroChar = '0';
         int mask = layerMask.value;
         char[] bits = new char[32];
-        for (int i = 0; i < bits.Length; i++)
+
+        for (int i = 0; i < bits.Length; i++) 
         {
-            bits[bits.Length - 1 - i] = ((mask >> i) & 1) == 1 ? '1' : '0';
+            bits[bits.Length - 1 - i] = (char)(zeroChar + (mask >> i & 1));
         }
+        
         return new string(bits);
+    }
+
+    public static IEnumerable<char> MaskToBinaryStringNonAlloc(LayerMask layerMask)
+    {
+        const char zeroChar = '0';
+        for (int i = 0; i < 32; i++)
+        {
+            char bitCharacter = (char)(zeroChar + (layerMask >> i & 1));
+            yield return bitCharacter;
+        }
+    }
+    
+    public static string MaskToBinaryStringConvert(LayerMask layerMask) 
+    {
+        // uses System, not System.Text
+        return System.Convert.ToString(layerMask, 2).PadLeft(32, '0');
     }
 
     public static int[] GetLayerIndexesFromMask(LayerMask layerMask)
@@ -34,6 +55,17 @@ public static class LayerMaskUtilities
         }
         System.Array.Resize(ref layerIndexes, index);
         return layerIndexes;
+    }
+
+    public static IEnumerable<int> GetLayerIndexesFromMaskNonAlloc(LayerMask layerMask) 
+    {
+        for (int i = 0; i < 32; i++) 
+        {
+            if ((1 << i & layerMask) != 0) 
+            {
+                yield return i;
+            }
+        }
     }
 
 #if UNITY_EDITOR
