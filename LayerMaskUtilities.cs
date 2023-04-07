@@ -20,6 +20,7 @@ public static class LayerMaskUtilities
 
         for (int i = 0; i < bits.Length; i++) 
         {
+            //bits[bits.Length - 1 - i] = ((mask >> i) & 1) == 1 ? '1' : '0';  // Produces garbage, less efficient formula
             bits[bits.Length - 1 - i] = (char)(zeroChar + (mask >> i & 1));
         }
         
@@ -38,8 +39,12 @@ public static class LayerMaskUtilities
     
     public static string MaskToBinaryStringConvert(LayerMask layerMask) 
     {
-        // uses System, not System.Text
         return System.Convert.ToString(layerMask, 2).PadLeft(32, '0');
+    }
+    
+    public static string MaskToHexadecimalStringConvert(LayerMask layerMask) 
+    {
+        return "0x" + System.Convert.ToString(layerMask, 16);
     }
 
     public static int[] GetLayerIndexesFromMask(LayerMask layerMask)
@@ -71,6 +76,7 @@ public static class LayerMaskUtilities
 #if UNITY_EDITOR
     public static string[] GetProjectLayers()
     {
+        // Test for need of safeguards. 
         SerializedObject tagManager = new SerializedObject(AssetDatabase.LoadMainAssetAtPath("ProjectSettings/TagManager.asset"));
         SerializedProperty layers = tagManager.FindProperty("layers");
         string[] result = new string[layers.arraySize];
